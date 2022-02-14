@@ -3,6 +3,7 @@
 # Version 1.0
 
 from PySide2 import QtWidgets, QtGui, QtCore
+import requests
 
 from package.api.api import Deezer, FormatFileName, Download
 
@@ -19,9 +20,9 @@ class MainWindow(QtWidgets.QWidget):
         self.item_selected = -1
 
     def setup_ui(self):
+        self.create_layouts()
         self.create_widgets()
         self.modify_widgets()
-        self.create_layouts()
         self.add_widgets_to_layouts()
         self.setup_connections()
         self.connect_keyboard_shortcuts()
@@ -32,6 +33,8 @@ class MainWindow(QtWidgets.QWidget):
         self.btn_search = QtWidgets.QPushButton("Rechercher")
         self.lt_results = QtWidgets.QListWidget()
         self.btn_download = QtWidgets.QPushButton("Télécharger")
+        self.preview_image("https://github.com/ldxdev/")
+
 
     def modify_widgets(self):
         self.lb_app_name.setText("Mujika - Cover Download")
@@ -67,14 +70,21 @@ class MainWindow(QtWidgets.QWidget):
         """)
 
     def create_layouts(self):
-        self.main_layout = QtWidgets.QVBoxLayout(self)
+        self.main_layout = QtWidgets.QHBoxLayout(self)
+        self.search_layout = QtWidgets.QVBoxLayout()
+        self.image_layout = QtWidgets.QVBoxLayout()
+        
+        self.main_layout.addLayout(self.search_layout)
+        self.main_layout.addLayout(self.image_layout)
 
     def add_widgets_to_layouts(self):
-        self.main_layout.addWidget(self.lb_app_name)
-        self.main_layout.addWidget(self.le_search)
-        self.main_layout.addWidget(self.btn_search)
-        self.main_layout.addWidget(self.lt_results)
-        self.main_layout.addWidget(self.btn_download)
+        self.search_layout.addWidget(self.lb_app_name)
+        self.search_layout.addWidget(self.le_search)
+        self.search_layout.addWidget(self.btn_search)
+        self.search_layout.addWidget(self.lt_results)
+        self.search_layout.addWidget(self.btn_download)
+        
+        self.image_layout.addWidget(self.img_preview)
 
 
     def setup_connections(self):
@@ -100,7 +110,16 @@ class MainWindow(QtWidgets.QWidget):
                 
     def change_row(self, currentRow):
         self.item_selected = currentRow
+        self.img_preview.deleteLater()
+        self.preview_image(self.lt_items_results[self.item_selected]["cover"])
+        self.image_layout.addWidget(self.img_preview)
                 
+    def preview_image(self, url:str):
+        image = QtGui.QImage()
+        image.loadFromData(requests.get(url=url).content)
+        self.img_preview = QtWidgets.QLabel()
+        self.img_preview.setPixmap(QtGui.QPixmap(image).scaled(350, 350, QtCore.Qt.KeepAspectRatio))
+    
     def download_cover(self):
         if not self.item_selected == -1:
             Download(self.lt_items_results[self.item_selected]["cover"], FormatFileName(self.lt_items_results[self.item_selected]["title"], self.lt_items_results[self.item_selected]["artist"]).format_file_name()).download()
