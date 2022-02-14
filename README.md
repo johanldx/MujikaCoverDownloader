@@ -12,6 +12,11 @@ Voici un exemple de recherche de l'album *Feu* de Nekfeu :
 
 Après avoir cliqué sur le bouton **Télécharger** ou double-cliqué sur l'album, la pochette sera directement téléchargé dans un dossier *albums* sur votre bureau.
 
+## Téléchargement
+
+[MujikaSetup.exe](https://github.com/ldxdev/mujika-cover-download/releases/tag/exe)
+[Mujika.zip](https://github.com/ldxdev/mujika-cover-download/releases/tag/folder)
+
 ## Fontionnement
 
 L'application est développé en Python grâce aux librairies *PySide2* et *fbs* afin de permettre une comptabilité sur Windows, MacOS et Linux.
