@@ -8,7 +8,7 @@ Mujika est une application multi-plateforme de téléchargement de pochettes d'a
 
 Voici un exemple de recherche de l'album *Feu* de Nekfeu :
 
-![](example.PNG)
+![](example.jpg)
 
 Après avoir cliqué sur le bouton **Télécharger** ou double-cliqué sur l'album, la pochette sera directement téléchargé dans un dossier *albums* sur votre bureau.
 
