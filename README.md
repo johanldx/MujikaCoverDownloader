@@ -15,6 +15,7 @@ Après avoir cliqué sur le bouton **Télécharger** ou double-cliqué sur l'alb
 ## Téléchargement
 
 [MujikaSetup.exe](https://github.com/ldxdev/mujika-cover-download/releases/tag/exe)
+
 [Mujika.zip](https://github.com/ldxdev/mujika-cover-download/releases/tag/folder)
 
 ## Fontionnement
