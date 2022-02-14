@@ -39,7 +39,7 @@ class MainWindow(QtWidgets.QWidget):
                 color : #ffffff;  
                 padding: 10px;       
         """)
-        self.le_search.setPlaceholderText("Nom de l'album")
+        self.le_search.setPlaceholderText("Nom de l'album ou de l'artiste")
         self.le_search.setStyleSheet("""
                 color : #ffffff;
                 background-color: #373E4E;
@@ -89,6 +89,7 @@ class MainWindow(QtWidgets.QWidget):
     def search_cover(self):
         if len(self.le_search.text()) > 0:
             self.lt_results.clear()
+            self.lt_items_results.clear()
             self.deezer = Deezer(self.le_search.text()).find_album()
             i = 0
             if not self.deezer == None:
