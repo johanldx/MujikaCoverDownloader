@@ -1,4 +1,4 @@
-import deezer, urllib.request, os
+import deezer, urllib.request, os, json
 
 class Deezer():
     def __init__(self, album_name:str):
@@ -37,9 +37,10 @@ class FormatFileName():
 
 
 class Download():
-    def __init__(self, url:str, name:str):
+    def __init__(self, url:str, name:str, folder:str):
         self.url = url
         self.name = name
+        self.folder = folder
 
     def download(self):
         """Téléchargement d'une pochette d'album
@@ -48,12 +49,9 @@ class Download():
             bool: Téléchargement
         """
         try:
-            folder = os.getenv("HOMEDRIVE") + os.getenv("HOMEPATH") + "\\Desktop\\albums\\"
-            if not os.path.exists(folder):
-                os.mkdir(folder)
-            f = open(os.getenv("HOMEDRIVE") + os.getenv("HOMEPATH") + "\\Desktop\\albums\\" + self.name,'wb')
-            f.write(urllib.request.urlopen(self.url).read())
-            f.close()
+            cover = open(self.folder + "\\" + self.name, 'wb')
+            cover.write(urllib.request.urlopen(self.url).read())
+            cover.close()
             return True
         except:
             return False

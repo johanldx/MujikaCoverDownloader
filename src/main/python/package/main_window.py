@@ -16,6 +16,8 @@ class MainWindow(QtWidgets.QWidget):
         self.setStyleSheet("background-color: #292F3F")
         self.setup_ui()
         
+        self.folder_download = str()
+        print(self.folder_download)
         self.lt_items_results = list()
         self.item_selected = -1
 
@@ -28,6 +30,7 @@ class MainWindow(QtWidgets.QWidget):
         self.connect_keyboard_shortcuts()
 
     def create_widgets(self):
+        self.btn_settings = QtWidgets.QPushButton("Options")
         self.lb_app_name = QtWidgets.QLabel()
         self.le_search = QtWidgets.QLineEdit()
         self.btn_search = QtWidgets.QPushButton("Rechercher")
@@ -37,6 +40,14 @@ class MainWindow(QtWidgets.QWidget):
 
 
     def modify_widgets(self):
+        self.btn_settings.setStyleSheet("""
+                color: #ffffff;
+                background-color: #373E4E;
+                border: 0px;     
+                border-radius: 5px;   
+                padding: 10px;             
+        """)
+        self.btn_settings.setMaximumWidth(100)
         self.lb_app_name.setText("Mujika - Cover Download")
         self.lb_app_name.setStyleSheet("""
                 color : #ffffff;  
@@ -71,14 +82,18 @@ class MainWindow(QtWidgets.QWidget):
 
     def create_layouts(self):
         self.main_layout = QtWidgets.QHBoxLayout(self)
+        self.settings_title_layout = QtWidgets.QHBoxLayout()
         self.search_layout = QtWidgets.QVBoxLayout()
         self.image_layout = QtWidgets.QVBoxLayout()
         
+        self.search_layout.addLayout(self.settings_title_layout)
         self.main_layout.addLayout(self.search_layout)
         self.main_layout.addLayout(self.image_layout)
 
     def add_widgets_to_layouts(self):
-        self.search_layout.addWidget(self.lb_app_name)
+        self.settings_title_layout.addWidget(self.btn_settings)
+        self.settings_title_layout.addWidget(self.lb_app_name)
+        
         self.search_layout.addWidget(self.le_search)
         self.search_layout.addWidget(self.btn_search)
         self.search_layout.addWidget(self.lt_results)
@@ -88,6 +103,7 @@ class MainWindow(QtWidgets.QWidget):
 
 
     def setup_connections(self):
+        self.btn_settings.clicked.connect(self.window_settings)
         self.btn_search.clicked.connect(self.search_cover)
         self.lt_results.currentRowChanged.connect(self.change_row)
         self.lt_results.itemDoubleClicked.connect(self.download_cover)
@@ -95,6 +111,9 @@ class MainWindow(QtWidgets.QWidget):
     
     def connect_keyboard_shortcuts(self):
         QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.Key_Return), self, self.btn_search.clicked.emit)
+    
+    def window_settings(self):
+        self.folder_download = QtWidgets.QFileDialog.getExistingDirectory(self, "Dossier de téléchargement")
     
     def search_cover(self):
         if len(self.le_search.text()) > 0:
@@ -121,5 +140,7 @@ class MainWindow(QtWidgets.QWidget):
         self.img_preview.setPixmap(QtGui.QPixmap(image).scaled(350, 350, QtCore.Qt.KeepAspectRatio))
     
     def download_cover(self):
+        if len(self.folder_download) == 0:
+            self.window_settings()
         if not self.item_selected == -1:
-            Download(self.lt_items_results[self.item_selected]["cover"], FormatFileName(self.lt_items_results[self.item_selected]["title"], self.lt_items_results[self.item_selected]["artist"]).format_file_name()).download()
+            Download(url=self.lt_items_results[self.item_selected]["cover"], name=FormatFileName(self.lt_items_results[self.item_selected]["title"], self.lt_items_results[self.item_selected]["artist"]).format_file_name(), folder=self.folder_download).download()
