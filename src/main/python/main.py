@@ -7,7 +7,7 @@ import sys
 if __name__ == '__main__':
     appctxt = ApplicationContext()
     window = MainWindow()
-    window.resize(650, 450)
+    window.resize(750, 450)
     window.show()
     exit_code = appctxt.app.exec_()
     sys.exit(exit_code)
