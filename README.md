@@ -6,7 +6,7 @@
 
 Mujika est une application multi-plateforme de téléchargement de pochettes d'albums en haute qualité. Grâce à une simple recherche vous avez accès à tout les albums disponibles sur les plateformes de streaming !
 
-Voici un exemple de recherche de l'album *Les étoiles vagabondes : expansion* de Nekfeu :
+Voici un exemple de recherche de l'album *Cyborg* de Nekfeu :
 
 ![](example.jpg)
 
@@ -26,7 +26,7 @@ La partie API est quand à elle développé grâce aux librairies *deezer-python
 Lorsque l'utilisateur fait une recherche, l'application fait une requete à l'API de Deezer afin de répupérer un dictionnaire contenant des dictionnaire de ce type :
 
 ```json
-{100821322: {'title': 'Les étoiles vagabondes : expansion', 'artist': 'Nekfeu', 'cover': 'https://e-cdns-images.dzcdn.net/images/cover/853d2682fcb082898db6e114baea0309/1000x1000-000000-80-0-0.jpg'}}
+{14720858: {'title': 'Cyborg', 'artist': 'Nekfeu', 'cover': 'https://e-cdns-images.dzcdn.net/images/cover/9ec588b46ba05c45272943ef0a7174a6/1000x1000-000000-80-0-0.jpg'}}
 ```
 On récupère donc les informations de l'album à afficher à l'utilisateur ainsi que l'URL de la pochette en qualité *xl* ([voir l'API de Deezer](https://developers.deezer.com/api/album)). L'identifiant utilisé pour les clés des dictionnaires est l'identifiant unique à chaque album présent sur Deezer afin d'éviter tout problèmes pour des albums ayant le même nom.
 
