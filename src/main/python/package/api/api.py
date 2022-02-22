@@ -17,6 +17,7 @@ class Deezer():
             for i in range(len(request)):
                 album = request[i]
                 result[album.id] = {"title": album.title, "artist": album.artist.name, "cover": album.cover_xl}
+            print(result)
             return result
         else:
             return None

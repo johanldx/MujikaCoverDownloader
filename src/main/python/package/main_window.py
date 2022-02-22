@@ -41,7 +41,7 @@ class MainWindow(QtWidgets.QWidget):
 
     def modify_widgets(self):
         self.btn_settings.setStyleSheet("""
-                color: #ffffff;
+                color: #F4F9FF;
                 background-color: #373E4E;
                 border: 0px;     
                 border-radius: 5px;   
@@ -50,31 +50,31 @@ class MainWindow(QtWidgets.QWidget):
         self.btn_settings.setMaximumWidth(100)
         self.lb_app_name.setText("Mujika - Cover Download")
         self.lb_app_name.setStyleSheet("""
-                color : #ffffff;  
+                color : #F4F9FF;  
                 padding: 10px;       
         """)
         self.le_search.setPlaceholderText("Nom de l'album ou de l'artiste")
         self.le_search.setStyleSheet("""
-                color : #ffffff;
+                color : #F4F9FF;
                 background-color: #373E4E;
                 border: 0px;  
                 padding: 10px;         
         """)
         self.lt_results.setStyleSheet("""
-                color : #ffffff;
+                color : #F4F9FF;
                 background-color: #373E4E;
                 border: 0px;       
         """)
         self.btn_search.setStyleSheet("""
-                color : #ffffff;
-                background-color: #03A9F1;
+                color : #F4F9FF;
+                background-color: #4291F9;
                 border: 0px;     
                 border-radius: 5px;   
                 padding: 10px;    
         """)
         self.btn_download.setStyleSheet("""
-                color : #ffffff;
-                background-color: #03A9F1;
+                color : #F4F9FF;
+                background-color: #4291F9;
                 border: 0px;  
                 border-radius: 5px;   
                 padding: 10px;         
