@@ -1,6 +1,6 @@
 <img src="mujika.jpg" width="75" height="75"> 
 
-# Mujika - Cover Download
+# Mujika - Cover Downloader
 
 ## L'application de téléchargement de cover d'album en haute qualité
 
